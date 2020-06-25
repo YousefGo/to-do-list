@@ -1,14 +1,39 @@
-<!DOCTYPE html>
-<html>
+<! html>
+<html>  
 
 <head>
     <meta charset="utf-8">
 </head>
 
 <body>
+<% if (sday==="Friday"||sday==="Saturday") {%>
 
-    <h1>it is a <%= KindOFday %></h1>
- 
+<h1 style ="color:purple">list of <%= KindOFday%></h1>
+<form action="/" method="POST" >
+    <input type="text" name="num1">
+  
+    <button type="submit">Submit test </button>
+    
+    </form>
+<% }
+else {
+%>
+<h1 style ="color:yellowgreen">list of <%= sday%></h1>
+<ul>
+<li>Buy food</li>
+<li>cook food</li>
+<li>eat food</li>
+<% for(var i =0 ;i<items.length ;i++){%>
+ <li><%=items[i]%></li>
+ <% }%>   
+</ul>
+<form action="/" method="POST" >
+    <input type="text" name="num1">
+   
+    <button type="submit">Submit test </button>
+    
+    </form>
+<% }%>
 
 </body>
 
