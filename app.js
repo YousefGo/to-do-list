@@ -10,9 +10,19 @@ app.set('view engine', 'ejs');
 
 var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 var today  = new Date();
+var weekday = new Array(7);
+weekday[0] = "Sunday";
+weekday[1] = "Monday";
+weekday[2] = "Tuesday";
+weekday[3] = "Wednesday";
+weekday[4] = "Thursday";
+weekday[5] = "Friday";
+weekday[6] = "Saturday";
+
+var n = weekday[today.getDay()];
 var StringDate=today.toLocaleDateString("en-US", options);
 var day = "";
-var items=[];
+var items=["buy food","cook food","eat foot"];
 app.use(bodyParser.urlencoded({extended:true}))
 app.get("/", function (req, res) {
     /* 0 == sunday 
@@ -25,7 +35,7 @@ app.get("/", function (req, res) {
     
     */
   
-    res.render("list", { sday:StringDate,items:items});
+    res.render("list", { sday:StringDate,items:items,myday:n});
 }
 
 

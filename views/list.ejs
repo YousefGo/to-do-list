@@ -3,16 +3,23 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
 <body>
-<% if (sday==="Friday"||sday==="Saturday") {%>
+<% if (myday==="Friday"||myday==="Saturday") {%>
 
-<h1 style ="color:purple">list of <%= KindOFday%></h1>
+<h1 style ="color:purple">list of <%= sday %></h1>
+<ul>
+
+    <% for(var i =0 ;i<items.length ;i++){%>
+     <li><%=items[i]%></li>
+     <% }%>   
+    </ul>
 <form action="/" method="POST" >
-    <input type="text" name="num1">
+    <input type="text" name="num1" required>
   
-    <button type="submit">Submit test </button>
+    <button type="submit">add</button>
     
     </form>
 <% }
@@ -20,17 +27,15 @@ else {
 %>
 <h1 style ="color:yellowgreen">list of <%= sday%></h1>
 <ul>
-<li>Buy food</li>
-<li>cook food</li>
-<li>eat food</li>
+
 <% for(var i =0 ;i<items.length ;i++){%>
  <li><%=items[i]%></li>
  <% }%>   
 </ul>
 <form action="/" method="POST" >
-    <input type="text" name="num1">
+    <input type="text" name="num1" required>
    
-    <button type="submit">Submit test </button>
+    <button type="submit">add </button>
     
     </form>
 <% }%>
