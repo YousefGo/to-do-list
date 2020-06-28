@@ -25,6 +25,7 @@ let day = "";
 let items=["buy food","cook food","eat foot"];
 let works=[];
 app.use(bodyParser.urlencoded({extended:true}));
+let high=[];
 app.use(express.static("public"));
 app.get("/", function (req, res) {
     /* 0 == sunday 
@@ -47,6 +48,17 @@ app.get("/work",function(req,res)
 res.render("list",{listTitle:"work",items:works});
 }
 )
+app.get("/high",function(req,res)
+{
+    res.render("list",{listTitle:"high",items:high});
+}
+)
+app.get("/about",function(req,res)
+
+{
+    res.render("about");
+}
+)
 app.post("/",function(req,res)
 {
     var item = req.body.num1;
@@ -54,6 +66,11 @@ app.post("/",function(req,res)
 if(req.body.list==="work")    
 {works.push(item);
 res.redirect("/work");
+}
+else if (req.body.list==="high")
+{
+high.push(item);
+res.redirect("/high");
 }
 else{
     items.push(item);
