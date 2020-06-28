@@ -8,9 +8,9 @@ const bodyParser = require("body-parser");
 app.set('view engine', 'ejs');
 // date 
 
-var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-var today  = new Date();
-var weekday = new Array(7);
+let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+let today  = new Date();
+let weekday = new Array(7);
 weekday[0] = "Sunday";
 weekday[1] = "Monday";
 weekday[2] = "Tuesday";
@@ -19,11 +19,13 @@ weekday[4] = "Thursday";
 weekday[5] = "Friday";
 weekday[6] = "Saturday";
 
-var n = weekday[today.getDay()];
-var StringDate=today.toLocaleDateString("en-US", options);
-var day = "";
-var items=["buy food","cook food","eat foot"];
-app.use(bodyParser.urlencoded({extended:true}))
+let n = weekday[today.getDay()];
+let StringDate=today.toLocaleDateString("en-US", options);
+let day = "";
+let items=["buy food","cook food","eat foot"];
+let works=[];
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static("public"));
 app.get("/", function (req, res) {
     /* 0 == sunday 
        1= monday 
@@ -35,17 +37,30 @@ app.get("/", function (req, res) {
     
     */
   
-    res.render("list", { sday:StringDate,items:items,myday:n});
+    res.render("list", { listTitle:StringDate,items:items,myday:n});
 }
 
 
 )
+app.get("/work",function(req,res)
+{
+res.render("list",{listTitle:"work",items:works});
+}
+)
 app.post("/",function(req,res)
 {
-var item = req.body.num1;
-items.push(item);
-res.redirect("/");
+    var item = req.body.num1;
+
+if(req.body.list==="work")    
+{works.push(item);
+res.redirect("/work");
 }
+else{
+    items.push(item);
+    res.redirect("/");
+}
+}
+
 )
 
 
